@@ -1,0 +1,30 @@
+{
+  "name": "bootcamp3",
+  "version": "1.0.0",
+  "description": "Bootcamp3 assignment",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "morgan": "^1.9.1",
+    "request": "^2.88.0",
+    "should": "^13.2.3",
+    "supertest": "^4.0.2"
+  },
+  "devDependencies": {
+    "mocha": "^6.2.0"
+  },
+  "scripts": {
+    "test": "mocha",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RyanSolomonTEST/Project3.git"
+  },
+  "author": "Ryan Solomon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RyanSolomonTEST/Project3/issues"
+  },
+  "homepage": "https://github.com/RyanSolomonTEST/Project3#readme"
+}
