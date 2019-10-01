@@ -39,7 +39,6 @@ module.exports = function(req, res, next) {
 
         var listing = JSON.parse(body);
         req.results = listing.results[0].geometry;
-        
 
         next();
     });

@@ -8,13 +8,11 @@ var mongoose = require('mongoose'),
   In this file, you should use Mongoose queries in order to retrieve/add/remove/update listings.
   On an error you should send a 404 status code, as well as the error message. 
   On success (aka no error), you should send the listing(s) as JSON in the response.
-
   HINT: if you are struggling with implementing these functions refer back to this tutorial 
   https://www.callicoder.com/node-js-express-mongodb-restful-crud-api-tutorial/
   or
   https://medium.com/@dinyangetoh/how-to-build-simple-restful-api-with-nodejs-expressjs-and-mongodb-99348012925d
   
-
   If you are looking for more understanding of exports and export modules - 
   https://www.sitepoint.com/understanding-module-exports-exports-node-js/
   or
@@ -54,8 +52,23 @@ exports.read = function(req, res) {
 };
 
 /* Update a listing - note the order in which this function is called by the router*/
+
 exports.update = function(req, res) {
   var listing = req.listing;
+
+  Listing.findByIdAndUpdate(req.params.listingId, {
+    code: req.body.code,
+    name: req.body.name
+}, {new: true})
+.then(note => {
+    if(!note) {
+        return res.status(404).send({
+            message: "Note not found with id " + req.params.listingId
+        });
+    }
+    res.send(note);
+})
+  
 
   /* Replace the listings's properties with the new properties found in req.body */
   listing.code = req.body.code;
@@ -78,7 +91,7 @@ exports.update = function(req, res) {
         console.log(err);
       }
       else{
-        res.json(listing);
+        res.send(listing);
       }
   })
   
@@ -115,7 +128,6 @@ exports.list = function(req, res) {
 
 /* 
   Middleware: find a listing by its ID, then pass it to the next request handler. 
-
   HINT: Find the listing using a mongoose query, 
         bind it to the request object as the property 'listing', 
         then finally call next
